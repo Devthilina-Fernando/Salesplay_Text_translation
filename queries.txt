@@ -1,0 +1,50 @@
+CREATE TABLE `language_strings` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `msgid` VARCHAR(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `msgstr` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `en_US` INT DEFAULT '0' COMMENT 'English',
+  `es_ES` INT DEFAULT '0' COMMENT 'Spanish',
+  `fi_FI` INT DEFAULT '0' COMMENT 'Filipino',
+  `ar_AE` INT DEFAULT '0' COMMENT 'Arabic',
+  `fr_FR` INT DEFAULT '0' COMMENT 'French',
+  `hi_IN` INT DEFAULT '0' COMMENT 'Hindi',
+  `km_KH` INT DEFAULT '0' COMMENT 'Khmer',
+  `ru_RU` INT DEFAULT '0' COMMENT 'Russian',
+  `zh_CN` INT DEFAULT '0' COMMENT 'Chinese',
+  `ja_JP` INT DEFAULT '0' COMMENT 'Japanese',
+  `sv_SE` INT DEFAULT '0' COMMENT 'Swedish',
+  `de_DE` INT DEFAULT '0' COMMENT 'German',
+  `az_AZ` INT DEFAULT '0' COMMENT 'Azerbaijani',
+  `uz_UZ` INT DEFAULT '0' COMMENT 'Uzbek',
+  `last_update` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_string` (`msgid`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+
+CREATE TABLE `language_locales` (
+	`id` BIGINT (20),
+	`language` VARCHAR (192),
+	`language_code` VARCHAR (48),
+	`language_name` VARCHAR (384),
+	`is_enable` INT (2),
+	`last_update` TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_string` (`language`)
+); 
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('0','English','en_US','English','1','2019-09-10 12:22:04');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('1','Spanish','es_ES','español','1','2019-09-10 12:22:13');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('2','Filipino','fi_FI','Filipino','1','2019-09-10 12:22:17');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('3','Arabic','ar_AE','العربية','1','2019-09-10 12:22:19');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('4','French','fr_FR','français','1','2019-09-10 12:22:19');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('5','Hindi','hi_IN','हिन्दी','1','2020-08-18 11:05:00');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('6','Khmer','km_KH','ខ្មែរ','1','2020-08-18 11:05:01');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('7','Russian','ru_RU','русский','1','2022-05-02 09:28:21');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('8','Chinese','zh_CN','中文','1','2022-05-02 09:28:22');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('9','Japanese','ja_JP','日本語','1','2022-05-02 09:28:22');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('10','Swedish','sv_SE','svenska','1','2022-05-02 09:28:22');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('11','German','de_DE','German','1','2022-06-28 21:37:25');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('12','Azerbaijani','az_AZ','Azərbaycan dili','1','2025-06-03 17:08:45');
+INSERT INTO `language_locales` (`id`, `language`, `language_code`, `language_name`, `is_enable`, `last_update`) VALUES('13','Uzbek','uz_UZ','O‘zbek tili','1','2025-06-03 17:08:45');

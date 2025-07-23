@@ -1,0 +1,12 @@
+PO FILE PROCESSING SUMMARY
+==================================================
+Processing completed at: 2025-07-23 15:43:08
+
+Total records in PO file: 7566
+Duplicate records found: 0
+Unique records processed: 7566
+Records uploaded to database: 7566
+
+==================================================
+NOTE: Only the first occurrence of each msgid was inserted into the database.
+Duplicates were skipped but preserved in a separate report file.

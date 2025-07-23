@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesplay Language Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-language"></i> Salesplay Language Manager</h1>
+            <p>Manage and configure all language settings for your application</p>
+            <div class="status-indicator status-connected">
+                <i class="fas fa-circle"></i> <span id="connection-status">Connected to API</span>
+            </div>
+        </header>
+        
+        <div class="dashboard">
+            <!-- Section 1: Add New Language -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>Add New Language</h2>
+                    <div class="card-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                </div>
+                <form id="language-form">
+                    <div class="form-group">
+                        <label for="name">Language Name</label>
+                        <input type="text" id="name" required minlength="2" maxlength="50" placeholder="e.g., French">
+                    </div>
+                    <div class="form-group">
+                        <label for="lang-string">Locale Code</label>
+                        <input type="text" id="lang-string" required minlength="2" maxlength="10" placeholder="e.g., fr_FR">
+                    </div>
+                    <div class="form-group">
+                        <label for="display-name">Display Name</label>
+                        <input type="text" id="display-name" required minlength="2" maxlength="100" placeholder="e.g., Français (France)">
+                    </div>
+                    <button type="submit" class="btn-submit" id="add-language-btn">
+                        <i class="fas fa-plus"></i> Add Language
+                    </button>
+                </form>
+            </section>
+            
+            <!-- Section 2: Upload File -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>Upload New Strings</h2>
+                    <div class="card-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                </div>
+                <form id="upload-form">
+                    <div class="file-upload-container" id="drop-zone">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop your file here or click to browse</p>
+                        <label for="file-upload" class="file-input-label">
+                            <i class="fas fa-folder-open"></i> Select File
+                        </label>
+                        <div class="file-name" id="file-name">No file selected</div>
+                        <input type="file" id="file-upload" accept=".txt">
+                    </div>
+                    <button type="submit" class="btn-submit" id="upload-btn">
+                        <i class="fas fa-upload"></i> Upload File
+                    </button>
+                    <div id="upload-message" class="upload-message"></div>
+                    <div id="duplicate-message" class="duplicate-message"></div>
+                </form>
+            </section>
+            
+
+            <!-- Section 3: Select Language -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>Generate Translation Files</h2>
+                    <div class="card-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="language-select">Choose Language</label>
+                    <select id="language-select">
+                        <option value="">Loading languages...</option>
+                    </select>
+                </div>
+                
+                <div class="action-group">
+                    <button id="select-btn" class="btn-submit">
+                        <i class="fas fa-file-download"></i> Generate PO File
+                    </button>
+                    <div id="select-message" class="status-message"></div>
+                </div>
+                
+                <div class="action-group">
+                    <button id="mo-btn" class="btn-submit">
+                        <i class="fas fa-file-download"></i> Generate MO File
+                    </button>
+                    <div id="select-mo-message" class="status-message"></div>
+                    <div id="mo-message" class="mo-message"></div>
+                </div>
+            </section>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2>Available Languages</h2>
+                <div class="card-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+            </div>
+            <div class="language-grid" id="language-grid">
+                <!-- Dynamically populated -->
+                <div class="language-card" data-lang="en_US">
+                    <i class="fas fa-flag"></i>
+                    <h3>en_US</h3>
+                    <p>English (US)</p>
+                </div>
+                <div class="language-card" data-lang="es_ES">
+                    <i class="fas fa-flag"></i>
+                    <h3>es_ES</h3>
+                    <p>Spanish (Spain)</p>
+                </div>
+                <div class="language-card" data-lang="fr_FR">
+                    <i class="fas fa-flag"></i>
+                    <h3>fr_FR</h3>
+                    <p>French (France)</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Toast Notification -->
+        <div id="toast" class="toast">
+            <i class="fas fa-info-circle"></i>
+            <span id="toast-message">Notification message</span>
+        </div>
+        
+        <footer>
+            <p>Salesplay Language Manager v2.0 | Secure and efficient localization management</p>
+        </footer>
+    </div>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

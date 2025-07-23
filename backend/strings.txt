@@ -1,0 +1,10 @@
+Welcome to our POS system!
+Please scan the item.
+Total Amount: $23.50
+Do you want to print the receipt?
+Please scan the item.
+Perform full or partial stocktakes with a barcode scanner or manually
+welcome
+14. Quickly stock add in receipt area
+Product(s)
+'yes'

@@ -1,0 +1,157 @@
+Trailing‑Spaces Report for: salesplaypos.po
+Generated: 2025-07-23 12:37:21
+Total issues found: 38
+============================================================
+
+Line 420: msgid
+  Original: 'msgid "Expiration Date "'
+  Text    : "Expiration Date"
+------------------------------------------------------------
+Line 421: msgstr
+  Original: 'msgstr "تاريخ انتهاء الصلاحية "'
+  Text    : "تاريخ انتهاء الصلاحية"
+------------------------------------------------------------
+Line 5326: msgstr
+  Original: 'msgstr "رمز المنتج  تجاوز الحد الأقصى لعدد المحارف (8) "'
+  Text    : "رمز المنتج  تجاوز الحد الأقصى لعدد المحارف (8)"
+------------------------------------------------------------
+Line 5371: msgstr
+  Original: 'msgstr "اسم المنتج تم تجاوز الحد الأقصى لعدد المحارف(24) "'
+  Text    : "اسم المنتج تم تجاوز الحد الأقصى لعدد المحارف(24)"
+------------------------------------------------------------
+Line 6818: msgstr
+  Original: 'msgstr "تغيير كلمة مرور "'
+  Text    : "تغيير كلمة مرور"
+------------------------------------------------------------
+Line 7554: msgstr
+  Original: 'msgstr "هذا ما وجدناه حول "'
+  Text    : "هذا ما وجدناه حول"
+------------------------------------------------------------
+Line 8225: msgid
+  Original: 'msgid "If you select a measurment other than "'
+  Text    : "If you select a measurment other than"
+------------------------------------------------------------
+Line 8226: msgstr
+  Original: 'msgstr "إذا قمت بتحديد قياس غير "'
+  Text    : "إذا قمت بتحديد قياس غير"
+------------------------------------------------------------
+Line 8992: msgstr
+  Original: 'msgstr "فشل إرسال البريد الإلكتروني "'
+  Text    : "فشل إرسال البريد الإلكتروني"
+------------------------------------------------------------
+Line 10122: msgstr
+  Original: 'msgstr "لقد قمت بالفعل "'
+  Text    : "لقد قمت بالفعل"
+------------------------------------------------------------
+Line 12572: msgid
+  Original: 'msgid "This amount will override "'
+  Text    : "This amount will override"
+------------------------------------------------------------
+Line 12573: msgstr
+  Original: 'msgstr "سيتم تجاوز هذا المبلغ "'
+  Text    : "سيتم تجاوز هذا المبلغ"
+------------------------------------------------------------
+Line 12602: msgid
+  Original: 'msgid "Premium Version "'
+  Text    : "Premium Version"
+------------------------------------------------------------
+Line 12784: msgid
+  Original: 'msgid "Staff Employees "'
+  Text    : "Staff Employees"
+------------------------------------------------------------
+Line 14097: msgstr
+  Original: 'msgstr "اسم العميل  تجاوز الحد الأقصى لعدد المحارف(64) "'
+  Text    : "اسم العميل  تجاوز الحد الأقصى لعدد المحارف(64)"
+------------------------------------------------------------
+Line 14100: msgstr
+  Original: 'msgstr "تم تجاوز الحد الأقصى لعدد المحارف(64) "'
+  Text    : "تم تجاوز الحد الأقصى لعدد المحارف(64)"
+------------------------------------------------------------
+Line 14103: msgstr
+  Original: 'msgstr "الوصف تم تجاوز الحد الأقصى لعدد المحارف(64) "'
+  Text    : "الوصف تم تجاوز الحد الأقصى لعدد المحارف(64)"
+------------------------------------------------------------
+Line 14296: msgid
+  Original: 'msgid "Salesplay "'
+  Text    : "Salesplay"
+------------------------------------------------------------
+Line 14297: msgstr
+  Original: 'msgstr "Salesplay "'
+  Text    : "Salesplay"
+------------------------------------------------------------
+Line 14303: msgstr
+  Original: 'msgstr "نعم ، أريد حذف "'
+  Text    : "نعم ، أريد حذف"
+------------------------------------------------------------
+Line 14542: msgid
+  Original: 'msgid "Measurement create "'
+  Text    : "Measurement create"
+------------------------------------------------------------
+Line 14814: msgstr
+  Original: 'msgstr "يمكن للمشرف يمكن تغيير كلمة مرور "'
+  Text    : "يمكن للمشرف يمكن تغيير كلمة مرور"
+------------------------------------------------------------
+Line 15047: msgstr
+  Original: 'msgstr "العناصر المنتجة وليس فقط "'
+  Text    : "العناصر المنتجة وليس فقط"
+------------------------------------------------------------
+Line 16306: msgid
+  Original: 'msgid "Item dispaly mode in billing interface "'
+  Text    : "Item dispaly mode in billing interface"
+------------------------------------------------------------
+Line 16307: msgstr
+  Original: 'msgstr "وضع عرض العناصر في واجهة الفواتير "'
+  Text    : "وضع عرض العناصر في واجهة الفواتير"
+------------------------------------------------------------
+Line 16377: msgstr
+  Original: 'msgstr "إذا كنت تريد إرفاق المنتج \\"انقر\\" زر إرفاق "'
+  Text    : "إذا كنت تريد إرفاق المنتج \"انقر\" زر إرفاق"
+------------------------------------------------------------
+Line 16502: msgid
+  Original: 'msgid "If you want to select the tax code. Please Remove the N/A. "'
+  Text    : "If you want to select the tax code. Please Remove the N/A."
+------------------------------------------------------------
+Line 16503: msgstr
+  Original: 'msgstr "إذا كنت ترغب في تحديد رمز الضريبة. الرجاء إزالة N/A. "'
+  Text    : "إذا كنت ترغب في تحديد رمز الضريبة. الرجاء إزالة N/A."
+------------------------------------------------------------
+Line 16891: msgstr
+  Original: 'msgstr "لإضافة مستوى مخزون الأمان، انتقل إلى قسم المزيد "'
+  Text    : "لإضافة مستوى مخزون الأمان، انتقل إلى قسم المزيد"
+------------------------------------------------------------
+Line 17589: msgstr
+  Original: 'msgstr "فشل نوع حذف "'
+  Text    : "فشل نوع حذف"
+------------------------------------------------------------
+Line 18382: msgid
+  Original: 'msgid "Bulk uploading will be done within 24 hours. Our support team will email you once it\'s finished. For questions or clarifications, contact "'
+  Text    : "Bulk uploading will be done within 24 hours. Our support team will email you once it's finished. For questions or clarifications, contact"
+------------------------------------------------------------
+Line 18383: msgstr
+  Original: 'msgstr "سيتم الرفع الجماعي خلال 24 ساعة. سيراسلك فريق الدعم عبر البريد الإلكتروني عند الانتهاء. للاستفسارات أو التوضيحات، يرجى الاتصال بـ "'
+  Text    : "سيتم الرفع الجماعي خلال 24 ساعة. سيراسلك فريق الدعم عبر البريد الإلكتروني عند الانتهاء. للاستفسارات أو التوضيحات، يرجى الاتصال بـ"
+------------------------------------------------------------
+Line 18553: msgid
+  Original: 'msgid "We\'ve sent a password reset link to "'
+  Text    : "We've sent a password reset link to"
+------------------------------------------------------------
+Line 18554: msgstr
+  Original: 'msgstr "لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى "'
+  Text    : "لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى"
+------------------------------------------------------------
+Line 18559: msgid
+  Original: 'msgid "Manage employees, create users, manage access rights, login alerts and sales by employee. "'
+  Text    : "Manage employees, create users, manage access rights, login alerts and sales by employee."
+------------------------------------------------------------
+Line 18598: msgid
+  Original: 'msgid "Measurement conversion  "'
+  Text    : "Measurement conversion"
+------------------------------------------------------------
+Line 18739: msgid
+  Original: 'msgid "This option helps to separate taxes and charges & charges transactions will be added to the income. "'
+  Text    : "This option helps to separate taxes and charges & charges transactions will be added to the income."
+------------------------------------------------------------
+Line 20098: msgid
+  Original: 'msgid "The \\"\\"Payment Voucher\\"\\" feature allows users to create, record, and manage payment vouchers efficiently. "'
+  Text    : "The \"\"Payment Voucher\"\" feature allows users to create, record, and manage payment vouchers efficiently."
+------------------------------------------------------------
