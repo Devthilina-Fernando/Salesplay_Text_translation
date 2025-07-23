@@ -4,20 +4,6 @@ This project provides a backend server for translating strings using OpenAI and 
 
 ---
 
-## 🚀 Prerequisites
-
-Install `uv` via `pipx` (if you don’t already have it):
-
-```bash
-python -m pip install --user pipx
-python -m pipx ensurepath
-pipx install uv
-```
-
-> **After installation**, restart your terminal.
-
----
-
 ## 🔧 Setup & Installation
 
 1. **Clone the repository**  
@@ -29,21 +15,26 @@ pipx install uv
    cd backend
    ```
 3. **Create a virtual environment**  
-   ```bash
-   uv venv
-   ```
-4. **Activate the environment**  
    - **Windows**  
      ```bash
-     .\.venv\Scripts\activate
+     python -m venv venv
      ```
    - **Linux/macOS**  
      ```bash
-     source .venv/bin/activate
+     python3 -m venv venv
+     ```
+4. **Activate the environment**  
+   - **Windows**  
+     ```bash
+     venv\Scripts\activate
+     ```
+   - **Linux/macOS**  
+     ```bash
+     source venv/bin/activate
      ```
 5. **Install Python dependencies**  
    ```bash
-   uv pip install -r requirements.txt
+   pip install -r requirements.txt
    ```
 6. **Configure environment variables**  
    Create a file named `.env` in the `backend` folder and add:
