@@ -68,3 +68,12 @@ This project provides a backend server for translating strings using OpenAI and 
 Press <kbd>Ctrl</kbd> + <kbd>C</kbd> in the terminal.
 
 ---
+
+
+If you don't have gettext, download it from the bellow link and install it
+
+for windows
+https://gnuwin32.sourceforge.net/packages/gettext.htm
+
+for linux
+

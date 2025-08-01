@@ -135,6 +135,154 @@ async def translate_msgids(db: Session, msgids: List[str], lang_name: str, lang_
     return translations
 
 #######################################################################################
+from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
+from sqlalchemy.orm import Session
+import csv
+import os
+from io import BytesIO, StringIO
+import logging
+from typing import List
+
+def read_csv_file(content: bytes):
+    """Read CSV file with encoding detection"""
+    # Try common encodings in order
+    encodings = ['utf-8', 'latin-1', 'cp1252', 'utf-16']
+    decoded_content = None
+    
+    for encoding in encodings:
+        try:
+            decoded_content = content.decode(encoding)
+            logger.info(f"Successfully decoded CSV using {encoding} encoding")
+            break
+        except UnicodeDecodeError:
+            continue
+    
+    if decoded_content is None:
+        raise HTTPException(
+            status_code=400,
+            detail="Unable to decode file. Supported encodings: UTF-8, Latin-1, CP1252, UTF-16"
+        )
+    
+    return decoded_content
+
+def read_excel_file(content: bytes, file_extension: str):
+    """Read Excel file (XLSX or XLS)"""
+    try:
+        if file_extension == 'xlsx':
+            from openpyxl import load_workbook
+            wb = load_workbook(filename=BytesIO(content))
+            sheet = wb.active
+            rows = sheet.iter_rows(values_only=True)
+            return list(rows)
+        
+        elif file_extension == 'xls':
+            import xlrd
+            book = xlrd.open_workbook(file_contents=content)
+            sheet = book.sheet_by_index(0)
+            return [sheet.row_values(row) for row in range(sheet.nrows)]
+        
+    except ImportError:
+        logger.error("Excel library not installed")
+        raise HTTPException(
+            status_code=500,
+            detail="Excel processing requires openpyxl for XLSX or xlrd for XLS files"
+        )
+    except Exception as e:
+        logger.error(f"Excel read error: {str(e)}")
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid Excel file: {str(e)}"
+        )
+
+def extract_translations_from_rows(rows: list):
+    """Extract translations from rows (CSV or Excel)"""
+    if len(rows) < 1:
+        raise HTTPException(
+            status_code=400,
+            detail="File is empty"
+        )
+    
+    # Get header row
+    headers = [str(cell).lower() if cell else "" for cell in rows[0]]
+    
+    # Find required columns
+    try:
+        msgid_index = headers.index("msgid")
+        msgstr_index = headers.index("msgstr")
+    except ValueError:
+        raise HTTPException(
+            status_code=400,
+            detail="File must contain 'msgid' and 'msgstr' columns"
+        )
+    
+    # Process data rows
+    msgids = []
+    translations = []
+    line_number = 1  # Start after header
+    
+    for row in rows[1:]:
+        line_number += 1
+        try:
+            # Handle different row formats (list vs tuple)
+            row_data = list(row) if isinstance(row, tuple) else row
+            
+            # Ensure row has enough columns
+            if len(row_data) <= max(msgid_index, msgstr_index):
+                raise ValueError(f"Missing values in row {line_number}")
+            
+            msgid = str(row_data[msgid_index]) if row_data[msgid_index] is not None else ""
+            msgstr = str(row_data[msgstr_index]) if row_data[msgstr_index] is not None else ""
+            
+            msgids.append(msgid)
+            translations.append(msgstr)
+            
+        except Exception as e:
+            logger.error(f"Error processing row {line_number}: {str(e)}")
+            raise HTTPException(
+                status_code=400,
+                detail=f"Error in row {line_number}: {str(e)}"
+            )
+    
+    return msgids, translations
+
+def process_uploaded_translations(db: Session, lang_code: str, msgids: List[str], translations: List[str]):
+    """
+    Update database with uploaded translations
+    """
+    # Verify equal length
+    if len(msgids) != len(translations):
+        raise ValueError("msgids and translations lists must have the same length")
+    
+    records = db.query(LanguageString).filter(
+        LanguageString.msgid.in_(msgids)
+    ).all()
+    
+    record_dict = {r.msgid: r for r in records}
+    not_found = []
+    
+    # Create new entries for missing msgids
+    for i, msgid in enumerate(msgids):
+        if msgid in record_dict:
+            # Update existing translation
+            setattr(record_dict[msgid], f"translation_{lang_code}", translations[i])
+        else:
+            # Create new record
+            new_record = LanguageString(
+                msgid=msgid,
+                **{f"translation_{lang_code}": translations[i]}
+            )
+            db.add(new_record)
+            not_found.append(msgid)
+    
+    try:
+        db.commit()
+        for msgid in not_found:
+            logger.info(f"Created new record for msgid: '{msgid}'")
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Database commit failed: {str(e)}")
+        raise
+
 
 
 def get_language_code_by_name(db: Session, language: str) -> Optional[str]:

@@ -52,7 +52,7 @@ def insert_new_strings_from_file(db: Session) -> Dict[str, int | List[dict]]:
                 continue
             
             # Add to insertion list and track in existing_msgids
-            to_insert.append(LanguageString(msgid=line, msgstr=''))
+            to_insert.append(LanguageString(msgid=line, msgstr=line))
             existing_msgids.add(line)  # Prevent duplicates in current file
         
         # Batch insert new records

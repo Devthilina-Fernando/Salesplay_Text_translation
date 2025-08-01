@@ -11,48 +11,129 @@ from backend.config.config import Config
 
 from datetime import datetime
 
-def safe_unescape(s):
-    """Safely unescape string while handling empty strings and special cases"""
-    if not s:
-        return s
+# def safe_unescape(s):
+#     """Safely unescape string while handling empty strings and special cases"""
+#     if not s:
+#         return s
         
-    try:
-        # Handle escaped characters
-        return s.encode('utf-8').decode('unicode_escape')
-    except UnicodeDecodeError:
-        # Fallback for problematic escape sequences
-        return s.replace('\\', '\\\\')
+#     try:
+#         # Handle escaped characters
+#         return s.encode('utf-8').decode('unicode_escape')
+#     except UnicodeDecodeError:
+#         # Fallback for problematic escape sequences
+#         return s.replace('\\', '\\\\')
+
+# def parse_po_content(po_content):
+#     """Parse PO content and extract msgid/msgstr pairs"""
+#     entries = []
+#     # Improved regex to handle multi-line strings and various quoting styles
+#     pattern = re.compile(
+#         r'msgid\s+(?:"(.*?)"|\'(.*?)\')\s+msgstr\s+(?:"(.*?)"|\'(.*?)\')',
+#         re.DOTALL
+#     )
+    
+#     for match in pattern.finditer(po_content):
+#         # Extract msgid from either double or single quoted group
+#         msgid = match.group(1) or match.group(2) or ""
+#         # Extract msgstr from either double or single quoted group
+#         msgstr = match.group(3) or match.group(4) or ""
+        
+#         # Unescape special characters safely
+#         msgid = safe_unescape(msgid)
+#         msgstr = safe_unescape(msgstr)
+        
+#         # Skip header entry (empty msgid)
+#         if not msgid:
+#             continue
+            
+#         # Truncate msgid if too long
+#         if len(msgid) > 512:
+#             msgid = msgid[:512]
+            
+#         entries.append((msgid, msgstr))
+    
+#     return entries
+
+def safe_unescape(s):
+    """Return the string as-is without unescaping"""
+    return s
+
+# def parse_po_content(po_content):
+#     """Parse PO content and extract msgid/msgstr pairs"""
+#     entries = []
+#     pattern = re.compile(
+#         r'msgid\s+(?:"(.*?)"|\'(.*?)\')\s+msgstr\s+(?:"(.*?)"|\'(.*?)\')',
+#         re.DOTALL
+#     )
+    
+#     for match in pattern.finditer(po_content):
+#         msgid = match.group(1) or match.group(2) or ""
+#         msgstr = match.group(3) or match.group(4) or ""
+        
+#         # Use the raw captured strings without unescaping
+#         msgid = safe_unescape(msgid)
+#         msgstr = safe_unescape(msgstr)
+        
+#         if not msgid:
+#             continue
+            
+#         if len(msgid) > 512:
+#             msgid = msgid[:512]
+            
+#         entries.append((msgid, msgstr))
+    
+#     return entries
+
 
 def parse_po_content(po_content):
-    """Parse PO content and extract msgid/msgstr pairs"""
+    """Parse PO content handling multi-line strings and empty entries correctly"""
     entries = []
-    # Improved regex to handle multi-line strings and various quoting styles
-    pattern = re.compile(
-        r'msgid\s+(?:"(.*?)"|\'(.*?)\')\s+msgstr\s+(?:"(.*?)"|\'(.*?)\')',
-        re.DOTALL
-    )
+    raw_entries = [e.strip() for e in po_content.split('\n\n') if e.strip()]
     
-    for match in pattern.finditer(po_content):
-        # Extract msgid from either double or single quoted group
-        msgid = match.group(1) or match.group(2) or ""
-        # Extract msgstr from either double or single quoted group
-        msgstr = match.group(3) or match.group(4) or ""
+    for entry in raw_entries:
+        lines = entry.splitlines()
+        msgid_parts = []
+        msgstr_parts = []
+        state = None  
         
-        # Unescape special characters safely
-        msgid = safe_unescape(msgid)
-        msgstr = safe_unescape(msgstr)
+        for line in lines:
+            stripped = line.strip()
+            if not stripped:
+                continue
+                
+            if stripped.startswith('msgid '):
+                state = 'msgid'
+                content = stripped[6:].strip()
+                if len(content) > 1 and content[0] == '"' and content[-1] == '"':
+                    msgid_parts.append(content[1:-1])
+            
+            elif stripped.startswith('msgstr '):
+                state = 'msgstr'
+                content = stripped[7:].strip()
+                if len(content) > 1 and content[0] == '"' and content[-1] == '"':
+                    msgstr_parts.append(content[1:-1])
+            
+            elif state and (stripped.startswith('"') or stripped.startswith("'")):
+                if len(stripped) > 1 and stripped[-1] == stripped[0]:
+                    content = stripped[1:-1]
+                    if state == 'msgid':
+                        msgid_parts.append(content)
+                    else:
+                        msgstr_parts.append(content)
         
-        # Skip header entry (empty msgid)
-        if not msgid:
+        msgid_str = ''.join(msgid_parts)
+        msgstr_str = ''.join(msgstr_parts)
+        
+        if not msgid_str:
             continue
             
-        # Truncate msgid if too long
-        if len(msgid) > 512:
-            msgid = msgid[:512]
+        if len(msgid_str) > 512:
+            msgid_str = msgid_str[:512]
             
-        entries.append((msgid, msgstr))
+        entries.append((msgid_str, msgstr_str))
     
     return entries
+
 
 def process_po_entries(entries):
     """Identify duplicates and separate unique entries"""
