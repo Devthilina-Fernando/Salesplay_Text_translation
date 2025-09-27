@@ -16,3 +16,6 @@ class LanguageLocaleCreate(BaseModel):
 class UploadFile(BaseModel):
     filename: str
     content_type: str
+
+class HealthStatus(BaseModel):
+    status: str
