@@ -103,6 +103,69 @@
                     <div id="mo-message" class="mo-message"></div>
                 </div>
             </section>
+
+
+            <section class="card">
+                <div class="card-header">
+                    <h2>Download Excel File</h2>
+                    <div class="card-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="download-main-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <p class="download-description">
+                        Click the button below to download the latest language strings in Excel format. The file will be generated with current timestamps.
+                    </p>
+                    <button id="download-excel-btn" class="download-button">
+                        <i class="fas fa-download"></i> Download Excel File
+                    </button>
+                    <div id="download-status-message" class="download-status"></div>
+                    
+                    <div class="file-details">
+                        <p><strong>File information:</strong></p>
+                        <p>Format: Excel (.xlsx)</p>
+                        <p>Content: Language strings</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Select Language -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>Upload Excel file</h2>
+                    <div class="card-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="language-select-excel">Choose Language</label>
+                        <select id="language-select-excel">
+                            <option value="">Loading languages...</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <form id="upload-excel">
+                    <div class="file-upload-container" id="drop-zone-excel">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop your completed excel file here or click to browse</p>
+                        <label for="file-upload" class="file-input-label">
+                            <i class="fas fa-folder-open"></i> Select File
+                        </label>
+                        <div class="excel-file-name" id="excel-file-name">No file selected</div>
+                        <input type="file" id="excel-file-upload" accept=".xlsx,.xls">
+                    </div>
+                    <button type="submit" class="btn-submit" id="excel-upload-btn">
+                        <i class="fas fa-upload"></i> Upload excel File
+                    </button>
+                    <div id="excel-upload-message" class="upload-message"></div>
+                </form>
+
+            </section>
         </div>
         
         <div class="card">

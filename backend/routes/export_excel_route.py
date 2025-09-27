@@ -11,48 +11,17 @@ import io
 
 router = APIRouter()
 
-# @router.get("/export")
-# async def export_language_strings(db: Session = Depends(get_db)):
-#     try:
-#         # Query all msgid values
-#         results = db.query(LanguageString.msgid).all()
-        
-#         # Create DataFrame with msgid and empty msgstr column
-#         df = pd.DataFrame(results, columns=['msgid'])
-#         df['msgstr'] = ""  # Add empty msgstr column
-        
-#         # Generate filename with timestamp
-#         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-#         filename = f"language_strings_{timestamp}.xlsx"
-        
-#         # Save to Excel
-#         df.to_excel(filename, index=False, engine='openpyxl')
-        
-#         # Return file response
-#         return FileResponse(
-#             filename,
-#             media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-#             filename=filename
-#         )
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
-#     finally:
-#         # Clean up temporary file
-#         if os.path.exists(filename):
-#             os.remove(filename)
-
 @router.get("/export")
 async def export_language_strings(db: Session = Depends(get_db)):
     try:
-        # Query only msgid column
-        results = db.query(LanguageString.msgid).all()
-        msgids = [r[0] for r in results]
+        # Query both msgid and msgstr columns
+        results = db.query(LanguageString.msgid, LanguageString.msgstr).all()
         
-        # Create DataFrame
-        df = pd.DataFrame({
-            "msgid": msgids,
-            "msgstr": [""] * len(msgids)  # Empty column
-        })
+        # Create DataFrame from the results
+        df = pd.DataFrame(results, columns=["msgid", "msgstr"])
+        
+        # Clear all msgstr values (set to empty string)
+        df['msgstr'] = ''
         
         # Create in-memory Excel file
         output = io.BytesIO()
