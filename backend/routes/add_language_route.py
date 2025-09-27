@@ -14,8 +14,6 @@ async def add_language_endpoint(
     db: Session = Depends(get_db)
 ):
     try:
-        print("///////////////////////////////")
-        print(locale_data)
         result = add_language_locale(db, locale_data)
         return {
             "message": "Language locale and column added successfully",
