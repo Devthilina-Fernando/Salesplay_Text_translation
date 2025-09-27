@@ -6,39 +6,67 @@
     <title>Salesplay Language Manager</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-
 </head>
 <body>
     <div class="container">
-        <header>
+        <!-- Header Section -->
+        <header class="main-header">
             <h1><i class="fas fa-language"></i> Salesplay Language Manager</h1>
             <p>Manage and configure all language settings for your application</p>
             <div class="status-indicator status-connected">
-                <i class="fas fa-circle"></i> <span id="connection-status">Connected to API</span>
+                <i class="fas fa-circle"></i>
+                <span id="connection-status">Connected to API</span>
             </div>
         </header>
         
-        <div class="dashboard">
-            <!-- Section 1: Add New Language -->
-            <section class="card">
+        <main class="dashboard">
+            <!-- Add New Language Section -->
+            <section class="card" id="add-language-section">
                 <div class="card-header">
                     <h2>Add New Language</h2>
                     <div class="card-icon">
                         <i class="fas fa-plus-circle"></i>
                     </div>
                 </div>
-                <form id="language-form">
+                <form id="language-form" class="language-form">
                     <div class="form-group">
                         <label for="name">Language Name</label>
-                        <input type="text" id="name" required minlength="2" maxlength="50" placeholder="e.g., French">
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name"
+                            required 
+                            minlength="2" 
+                            maxlength="50" 
+                            placeholder="e.g., French"
+                            class="form-control"
+                        >
                     </div>
                     <div class="form-group">
                         <label for="lang-string">Locale Code</label>
-                        <input type="text" id="lang-string" required minlength="2" maxlength="10" placeholder="e.g., fr_FR">
+                        <input 
+                            type="text" 
+                            id="lang-string" 
+                            name="langString"
+                            required 
+                            minlength="2" 
+                            maxlength="10" 
+                            placeholder="e.g., fr_FR"
+                            class="form-control"
+                        >
                     </div>
                     <div class="form-group">
                         <label for="display-name">Display Name</label>
-                        <input type="text" id="display-name" required minlength="2" maxlength="100" placeholder="e.g., Français (France)">
+                        <input 
+                            type="text" 
+                            id="display-name" 
+                            name="displayName"
+                            required 
+                            minlength="2" 
+                            maxlength="100" 
+                            placeholder="e.g., Français (France)"
+                            class="form-control"
+                        >
                     </div>
                     <button type="submit" class="btn-submit" id="add-language-btn">
                         <i class="fas fa-plus"></i> Add Language
@@ -46,15 +74,15 @@
                 </form>
             </section>
             
-            <!-- Section 2: Upload File -->
-            <section class="card">
+            <!-- Upload Text Strings Section -->
+            <section class="card" id="upload-strings-section">
                 <div class="card-header">
                     <h2>Upload New Strings</h2>
                     <div class="card-icon">
                         <i class="fas fa-upload"></i>
                     </div>
                 </div>
-                <form id="upload-form">
+                <form id="upload-form" class="upload-form">
                     <div class="file-upload-container" id="drop-zone">
                         <i class="fas fa-cloud-upload-alt"></i>
                         <p>Drag & drop your file here or click to browse</p>
@@ -62,50 +90,51 @@
                             <i class="fas fa-folder-open"></i> Select File
                         </label>
                         <div class="file-name" id="file-name">No file selected</div>
-                        <input type="file" id="file-upload" accept=".txt">
+                        <input type="file" id="file-upload" accept=".txt" class="file-input">
                     </div>
                     <button type="submit" class="btn-submit" id="upload-btn">
                         <i class="fas fa-upload"></i> Upload File
                     </button>
-                    <div id="upload-message" class="upload-message"></div>
-                    <div id="duplicate-message" class="duplicate-message"></div>
+                    <div id="upload-message" class="status-message"></div>
+                    <div id="duplicate-message" class="list-message"></div>
                 </form>
             </section>
-            
 
-            <!-- Section 3: Select Language -->
-            <section class="card">
+            <!-- Generate Translation Files Section -->
+            <section class="card" id="generate-files-section">
                 <div class="card-header">
                     <h2>Generate Translation Files</h2>
                     <div class="card-icon">
                         <i class="fas fa-check-circle"></i>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="language-select">Choose Language</label>
-                    <select id="language-select">
-                        <option value="">Loading languages...</option>
-                    </select>
-                </div>
-                
-                <div class="action-group">
-                    <button id="select-btn" class="btn-submit">
-                        <i class="fas fa-file-download"></i> Generate PO File
-                    </button>
-                    <div id="select-message" class="status-message"></div>
-                </div>
-                
-                <div class="action-group">
-                    <button id="mo-btn" class="btn-submit">
-                        <i class="fas fa-file-download"></i> Generate MO File
-                    </button>
-                    <div id="select-mo-message" class="status-message"></div>
-                    <div id="mo-message" class="mo-message"></div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="language-select">Choose Language</label>
+                        <select id="language-select" class="form-control">
+                            <option value="">Loading languages...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="action-group">
+                        <button id="select-btn" class="btn-submit">
+                            <i class="fas fa-file-download"></i> Generate PO File
+                        </button>
+                        <div id="select-message" class="status-message"></div>
+                    </div>
+                    
+                    <div class="action-group">
+                        <button id="mo-btn" class="btn-submit">
+                            <i class="fas fa-file-download"></i> Generate MO File
+                        </button>
+                        <div id="select-mo-message" class="status-message"></div>
+                        <div id="mo-message" class="error-message"></div>
+                    </div>
                 </div>
             </section>
 
-
-            <section class="card">
+            <!-- Download Excel Section -->
+            <section class="card" id="download-excel-section">
                 <div class="card-header">
                     <h2>Download Excel File</h2>
                     <div class="card-icon">
@@ -117,58 +146,61 @@
                         <i class="fas fa-file-excel"></i>
                     </div>
                     <p class="download-description">
-                        Click the button below to download the latest language strings in Excel format. The file will be generated with current timestamps.
+                        Click the button below to download the latest language strings in Excel format. 
+                        The file will be generated with current timestamps.
                     </p>
-                    <button id="download-excel-btn" class="download-button">
+                    <button id="download-excel-btn" class="btn-submit download-button">
                         <i class="fas fa-download"></i> Download Excel File
                     </button>
-                    <div id="download-status-message" class="download-status"></div>
+                    <div id="download-status-message" class="status-message"></div>
                     
                     <div class="file-details">
-                        <p><strong>File information:</strong></p>
-                        <p>Format: Excel (.xlsx)</p>
-                        <p>Content: Language strings</p>
+                        <h4>File Information</h4>
+                        <ul class="details-list">
+                            <li><strong>Format:</strong> Excel (.xlsx)</li>
+                            <li><strong>Content:</strong> Language strings</li>
+                        </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Section 5: Select Language -->
-            <section class="card">
+            <!-- Upload Excel Section -->
+            <section class="card" id="upload-excel-section">
                 <div class="card-header">
-                    <h2>Upload Excel file</h2>
+                    <h2>Upload Excel File</h2>
                     <div class="card-icon">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-file-excel"></i>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="language-select-excel">Choose Language</label>
-                        <select id="language-select-excel">
+                        <select id="language-select-excel" class="form-control">
                             <option value="">Loading languages...</option>
                         </select>
                     </div>
+                    
+                    <form id="upload-excel" class="upload-form">
+                        <div class="file-upload-container" id="drop-zone-excel">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop your completed Excel file here or click to browse</p>
+                            <label for="excel-file-upload" class="file-input-label">
+                                <i class="fas fa-folder-open"></i> Select File
+                            </label>
+                            <div class="file-name" id="excel-file-name">No file selected</div>
+                            <input type="file" id="excel-file-upload" accept=".xlsx,.xls" class="file-input">
+                        </div>
+                        <button type="submit" class="btn-submit" id="excel-upload-btn">
+                            <i class="fas fa-upload"></i> Upload Excel File
+                        </button>
+                        <div id="excel-upload-message" class="status-message"></div>
+                    </form>
                 </div>
-                
-                <form id="upload-excel">
-                    <div class="file-upload-container" id="drop-zone-excel">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>Drag & drop your completed excel file here or click to browse</p>
-                        <label for="file-upload" class="file-input-label">
-                            <i class="fas fa-folder-open"></i> Select File
-                        </label>
-                        <div class="excel-file-name" id="excel-file-name">No file selected</div>
-                        <input type="file" id="excel-file-upload" accept=".xlsx,.xls">
-                    </div>
-                    <button type="submit" class="btn-submit" id="excel-upload-btn">
-                        <i class="fas fa-upload"></i> Upload excel File
-                    </button>
-                    <div id="excel-upload-message" class="upload-message"></div>
-                </form>
-
             </section>
-        </div>
+        </main>
         
-        <div class="card">
+        <!-- Available Languages Grid -->
+        <section class="card" id="languages-overview">
             <div class="card-header">
                 <h2>Available Languages</h2>
                 <div class="card-icon">
@@ -177,31 +209,17 @@
             </div>
             <div class="language-grid" id="language-grid">
                 <!-- Dynamically populated -->
-                <div class="language-card" data-lang="en_US">
-                    <i class="fas fa-flag"></i>
-                    <h3>en_US</h3>
-                    <p>English (US)</p>
-                </div>
-                <div class="language-card" data-lang="es_ES">
-                    <i class="fas fa-flag"></i>
-                    <h3>es_ES</h3>
-                    <p>Spanish (Spain)</p>
-                </div>
-                <div class="language-card" data-lang="fr_FR">
-                    <i class="fas fa-flag"></i>
-                    <h3>fr_FR</h3>
-                    <p>French (France)</p>
-                </div>
             </div>
-        </div>
+        </section>
         
         <!-- Toast Notification -->
-        <div id="toast" class="toast">
+        <div id="toast" class="toast" role="alert" aria-live="polite">
             <i class="fas fa-info-circle"></i>
             <span id="toast-message">Notification message</span>
         </div>
         
-        <footer>
+        <!-- Footer -->
+        <footer class="main-footer">
             <p>Salesplay Language Manager v2.0 | Secure and efficient localization management</p>
         </footer>
     </div>
